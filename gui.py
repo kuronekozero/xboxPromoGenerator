@@ -24,7 +24,7 @@ class Application(tk.Tk):
 
         self.create_label_entry("Название:", "game_name")
         self.create_label_combobox("Русский язык:", "russian_language",
-                                   ["РУССКИЕ СУБТИТРЫ", "ПОЛНОСТЬЮ НА РУССКОМ", "АНГЛИЙСКИЙ ЯЗЫК"])
+                                   ["СУБТИТРЫ", "ПОЛНАЯ ЛОКАЛИЗАЦИЯ", "БЕЗ ПЕРЕВОДА"])
         self.create_label_combobox("Платформы:", "platforms", ["Xbox ONE", "Xbox Series X", "Xbox Series S", "One,Series S|X"])
         self.create_label_combobox("Версия игры:", "game_version", ["Standard Edition", "Deluxe Edition"])
         self.create_label_entry("Цена:", "game_price")

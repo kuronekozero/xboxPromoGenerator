@@ -108,6 +108,11 @@ def parse_game_info(game_link):
             platforms = list_element.find('span', {'itemprop': 'name'}).text.replace(' ', '')
             break
 
+    if platforms == "XboxSeriesX|S":
+        platforms = "Xbox Series X|S"
+    elif platforms == "XboxOne":
+        platforms = "ONE&Series X|S"
+
     # Ищем ссылку на страницу игры в PS Store
     ps_store_link_element = soup.find('a', {'class': 'game-buy-button-href'})
     ps_store_link = ps_store_link_element['href'] if ps_store_link_element else ''
