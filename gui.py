@@ -13,7 +13,7 @@ class Application(tk.Tk):
         super().__init__()
 
         self.title("PS Store Reseller App")
-        self.geometry("500x650")
+        self.geometry("500x600")
 
         # Создаем поля для ввода
         self.create_label_entry("Ссылка:", "game_link")  # Добавляем новое поле для ввода ссылки
@@ -26,10 +26,15 @@ class Application(tk.Tk):
         self.create_label_combobox("Русский язык:", "russian_language",
                                    ["СУБТИТРЫ", "ПОЛНАЯ ЛОКАЛИЗАЦИЯ", "БЕЗ ПЕРЕВОДА"])
         self.create_label_combobox("Платформы:", "platforms", ["Xbox ONE", "Xbox Series X", "Xbox Series S", "One,Series S|X"])
-        self.create_label_combobox("Версия игры:", "game_version", ["Standard Edition", "Deluxe Edition"])
+        self.create_label_combobox("Версия игры:", "game_version", ["Standard Edition", "Deluxe Edition", "Ultimate Edition"])
         self.create_label_entry("Цена:", "game_price")
         self.create_label_entry("Скидка:", "discount")
         self.create_label_entry("Дата окончания скидки:", "discount_end_date")
+
+        # Создаем чекбокс для накладывания изображения
+        self.gamepass_var = tk.BooleanVar()
+        gamepass_checkbox = tk.Checkbutton(self, text="Game Pass", variable=self.gamepass_var)
+        gamepass_checkbox.pack(pady=10)
 
         # Создаем кнопку для выбора изображения
         self.image_path = tk.StringVar()
@@ -40,13 +45,7 @@ class Application(tk.Tk):
         submit_button = ttk.Button(self, text="Отправить", command=self.submit)
         submit_button.pack(pady=10)
 
-        # Добавляем кнопку "Настройки"
-        settings_button = tk.Button(self, text="Настройки", command=self.open_settings)
-        settings_button.pack(pady=10)
 
-        # Добавляем кнопку "Калькулятор"
-        calculator_button = tk.Button(self, text="Калькулятор", command=self.open_calculator)
-        calculator_button.pack(pady=10)
 
     def open_settings(self):
         # Создаем новое окно настроек
@@ -61,12 +60,12 @@ class Application(tk.Tk):
         game_link = self.game_link.get()
 
         # Парсим информацию с сайта
-        game_name, platforms, price, discount, language, discount_end_date = parse_game_info(game_link)
+        game_name, platforms, discount, language, discount_end_date = parse_game_info(game_link)
 
         # Заполняем поля для ввода
         self.game_name.set(game_name)
         self.platforms.set(platforms)
-        self.game_price.set(price)
+        #self.game_price.set()
         self.discount.set(discount)  # Устанавливаем значение поля "Скидка"
         self.russian_language.set(language)
         self.discount_end_date.set(discount_end_date)  # Добавьте эту строку
@@ -111,24 +110,33 @@ class Application(tk.Tk):
         discount_end_date = self.discount_end_date.get()
 
         discount_position_square = [3000, 3620]
-        discount_position_text = [3030, 3810]
+        discount_position_text = [3030, 3675]
 
         if discount:
             editor = ImageEditor("newtemplate.png")
-            price_position = [705, 3600]
+            price_position = [700, 3400]
         else:
             # Создаем экземпляр ImageEditor и добавляем текст на изображение
             editor = ImageEditor("newtemplate2.png")
-            price_position = [705, 3500]
+            price_position = [700, 3400]
 
-        editor.add_text(game_name, (700, 3250), "fonts/Segoe UI.ttf", 150, "black")
+        editor.add_text(game_name, (700, 3210), "fonts/segoe-ui.ttf", 150, "black")
 
         # Используем функцию add_gradient_text для добавления цены с градиентом
-        editor.add_gradient_text(game_price, price_position, "fonts/Segoe UI Bold.ttf", 600)
+        editor.add_gradient_text(game_price, price_position, "fonts/segoe-ui-gras.ttf", 600)
 
-        editor.add_text(russian_language, (1320, 3100), "fonts/Segoe UI Bold.ttf", 85, "white")
-        editor.add_text(platforms, (750, 3090), "fonts/Segoe UI Bold.ttf", 110, "white")
-        editor.add_text(game_version, (705, 3430), "fonts/Segoe UI Bold.ttf", 130, "gray")
+        # Вычисляем ширину текста цены
+        font = ImageFont.truetype("fonts/segoe-ui-gras.ttf", 600)
+        text_width, _ = font.getsize(game_price)
+
+        # Расчитываем позицию символа рубля
+        ruble_position = [price_position[0] + text_width + 50,
+                          3495]
+        editor.add_gradient_text("₽", ruble_position, "fonts/Roboto-Medium.ttf", 600)
+
+        editor.add_text(russian_language, (1610, 3090), "fonts/segoe-ui-semibold.ttf", 85, "white")
+        editor.add_text(platforms, (775, 3075), "fonts/segoe-ui-semibold.ttf", 100, "white")
+        editor.add_text(game_version, (705, 3390), "fonts/segoe-ui-semibold.ttf", 130, "gray")
 
         if len(game_price) >= 6:
             pass
@@ -136,24 +144,11 @@ class Application(tk.Tk):
             discount_position_square[0] -= 250
             discount_position_text[0] -= 250
 
-        # # Определяем регион игры и загружаем соответствующее изображение
-        # if "ua-store" in game_link:
-        #     region_image = Image.open("ukraine.png")
-        # elif "tr-store" in game_link:
-        #     region_image = Image.open("turkey.png")
-        #
-        # # Изменяем размер изображения, сохраняя пропорции
-        # max_size = (838, 838)
-        # region_image.thumbnail(max_size)
-
-        # Добавляем изображение региона на итоговое изображение
-        # editor.image.paste(region_image, (2570, 3071), region_image)
-
         # Load the discount square image
         discount_square = Image.open("square.png")
 
         # Resize the discount square image (replace 'new_width' and 'new_height' with your desired size)
-        discount_square = discount_square.resize((650, 650))
+        discount_square = discount_square.resize((600, 380))
 
         # Open the background image
         background = Image.open(self.image_path.get())
@@ -182,11 +177,22 @@ class Application(tk.Tk):
         # Paste the discount square onto the image (replace 'x' and 'y' with your desired coordinates)
         if discount:
             editor.image.paste(discount_square, discount_position_square, discount_square)
-            editor.add_text(discount, discount_position_text, "fonts/Segoe UI.ttf", 220, "white")
-            editor.add_text(discount_end_date, (1200, 4300), "fonts/Segoe UI Bold.ttf", 100, "gray")
+            editor.add_text(discount, discount_position_text, "fonts/segoe-ui-gras-italique.ttf", 210, "white")
+            editor.add_text(discount_end_date, (1390, 4072), "fonts/segoe-ui-semibold.ttf", 110, "gray")
 
         # Накладываем шаблон на фоновое изображение
         final_image.paste(editor.image.resize((4096, 4857)), (0, 0), editor.image.resize((4096, 4857)))
+
+        if self.gamepass_var.get():
+            gamepass_image = Image.open("gamepass.png")
+
+            # Изменяем размер изображения в процентах
+            scale_percent = 100  # Проценты от исходного размера
+            new_width = int(gamepass_image.width * scale_percent / 100)
+            new_height = int(gamepass_image.height * scale_percent / 100)
+            gamepass_image = gamepass_image.resize((new_width, new_height))
+
+            final_image.paste(gamepass_image, (2650, 3030), gamepass_image)
 
         # Сохраняем изображение с уникальным именем файла
         output_path = "output/output.png"

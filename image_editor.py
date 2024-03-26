@@ -42,7 +42,7 @@ class ImageEditor:
         text_width, text_height = font.getsize(text)
 
         # Создаем изображение с градиентом
-        gradient = self.create_gradient(text_width, text_height, (81, 97, 234), (70, 140, 254))
+        gradient = self.create_gradient(text_width, text_height, (30, 94, 96), (53, 239, 40))
 
         # Создаем новое изображение для текста
         text_image = Image.new('RGBA', (text_width, text_height), (0, 0, 0, 0))

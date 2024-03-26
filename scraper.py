@@ -25,46 +25,25 @@ def parse_game_info(game_link):
     price_element = soup.find('meta', {'itemprop': 'price'})
     price_in_peso = float(price_element['content']) if price_element else 0
 
-    # Определяем регион игры
-    if "ua-store" in game_link:
-        region = "ua"
-    elif "tr-store" in game_link:
-        region = "tr"
-
     # Конвертируем цену в рубли
-    # price_in_rubles = convert_price(price_in_lira, region)
+    # price_in_rubles = convert_price(price_in_peso)
 
     # Добавляем символ рубля к цене
-    #price = f"{price_in_rubles}₽"
+    # price = f"{price_in_rubles}₽"
 
     month_dict_tr = {
-        "Oca": "Января",
-        "Şub": "Февраля",
-        "Mar": "Марта",
-        "Nīs": "Апреля",
-        "May": "Мая",
-        "Haz": "Июня",
-        "Tem": "Июля",
-        "Ağu": "Августа",
-        "Eyl": "Сентября",
-        "Eki": "Октября",
-        "Kas": "Ноября",
-        "Ara": "Декабря"
-    }
-
-    month_dict_ua = {
-        "січе.": "Января",
-        "люти.": "Февраля",
-        "бере.": "Марта",
-        "квіт.": "Апреля",
-        "трав.": "Мая",
-        "черв.": "Июня",
-        "липе.": "Июля",
-        "серп.": "Августа",
-        "вере.": "Сентября",
-        "жовт.": "Октября",
-        "лист.": "Ноября",
-        "груд.": "Декабря"
+        "en": "Января",
+        "feb": "Февраля",
+        "mar": "Марта",
+        "abr": "Апреля",
+        "may": "Мая",
+        "jun": "Июня",
+        "jul": "Июля",
+        "ag": "Августа",
+        "sep": "Сентября",
+        "oct": "Октября",
+        "nov": "Ноября",
+        "dic": "Декабря"
     }
 
     # Ищем тег <span> с классом "game-cover-save-bonus" и извлекаем его текст
@@ -75,18 +54,12 @@ def parse_game_info(game_link):
     discount_end_date_element = soup.find('p', {'class': 'game-cover-bottom-small'})
     if discount_end_date_element:
         discount_end_date = discount_end_date_element.text
-        if "ua-store" in game_link:
-            discount_end_date = discount_end_date.replace("Закінчується:", "Скидка действует до:")
-            # Заменяем украинские сокращения на русские названия месяцев
-            for ukrainian, russian in month_dict_ua.items():
-                discount_end_date = discount_end_date.replace(ukrainian, russian)
-        elif "tr-store" in game_link:
-            discount_end_date = discount_end_date.replace("Ends:", "Скидка действует до:")
-            # Заменяем турецкие сокращения на русские названия месяцев
-            for turkish, russian in month_dict_tr.items():
-                discount_end_date = discount_end_date.replace(turkish, russian)
+        discount_end_date = discount_end_date.replace("Ends:", "Скидка действует до:")
+        # Заменяем турецкие сокращения на русские названия месяцев
+        for spanish, russian in month_dict_tr.items():
+            discount_end_date = discount_end_date.replace(spanish, russian)
         # Удаляем "р." из даты
-        discount_end_date = discount_end_date.replace(" р.", "")
+        discount_end_date = discount_end_date.replace(".", "")
     else:
         discount_end_date = ''
 
@@ -150,4 +123,4 @@ def parse_game_info(game_link):
     if discount != "":
         discount = "-" + str(discount)
 
-    return game_title, platforms, price_in_peso, discount, language, discount_end_date
+    return game_title, platforms, discount, language, discount_end_date

@@ -6,9 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="56a40afc-c646-4ba7-9033-0a6bbc629fba" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/Segoe UI Bold Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/Segoe UI Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/Segoe UI Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/Segoe UI.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/SegoeUIBold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/SegoeUILight.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/SegoeUIRegular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fonts/SegoeUISemiBold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamepass.png" beforeDir="false" afterPath="$PROJECT_DIR$/gamepass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradient.png" beforeDir="false" afterPath="$PROJECT_DIR$/gradient.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image_editor.py" beforeDir="false" afterPath="$PROJECT_DIR$/image_editor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output.png" beforeDir="false" afterPath="$PROJECT_DIR$/output/output.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output2.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/scraper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/square.png" beforeDir="false" afterPath="$PROJECT_DIR$/square.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +50,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "C:/Users/Kuroneko/Desktop/xboxPromoGenerator/PSStorePromoGenerator",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kuroneko/Desktop/xboxPromoGenerator/PSStorePromoGenerator&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.main">
     <configuration name="gui" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="photoshopAuto" />
